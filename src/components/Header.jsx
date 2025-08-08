@@ -51,13 +51,13 @@ function Header() {
 
                 {dropdown && (
                   <ul className="absolute top-full left-0 mt-1 bg-white text-black rounded-md shadow-lg w-48 z-50">
-                    <li className="w-full text-left px-4 py-2 hover:bg-black hover:text-white duration-200 rounded-t-md">
+                    <li onClick={()=> setDropdown(false)} className="w-full text-left px-4 py-2 hover:bg-black hover:text-white duration-200 rounded-t-md">
                       <Link to="/menscollection">Mens Collection</Link>
                     </li>
-                    <li className="w-full text-left px-4 py-2 hover:bg-black hover:text-white duration-200">
+                    <li onClick={()=> setDropdown(false)} className="w-full text-left px-4 py-2 hover:bg-black hover:text-white duration-200">
                       <Link to="/womencollection">Women Collection</Link>
                     </li>
-                    <li className="w-full text-left px-4 py-2 hover:bg-black hover:text-white duration-200 rounded-b-md">
+                    <li onClick={()=> setDropdown(false)} className="w-full text-left px-4 py-2 hover:bg-black hover:text-white duration-200 rounded-b-md">
                       <Link to="/kidcollection">Kids Collection</Link>
                     </li>
                   </ul>
