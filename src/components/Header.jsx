@@ -1,10 +1,15 @@
 import { ChevronDown, Menu, Search, ShoppingCart, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useShop } from "../context/ShopContext";
 function Header() {
+  const { categories } = useShop();
+  const {getbycategory} = useShop()
+
   const [dropdown, setDropdown] = useState(false);
   const [IsOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef();
+
 
   const handledropdown = () => {
     setDropdown(!dropdown);
@@ -24,10 +29,10 @@ function Header() {
   }, []);
   return (
     <>
-      <div className="sticky top-0 w-full h-auto md:h-16 bg-black text-white py-5 md:py-4">
+      <div className="fixed top-0 z-50 w-full h-auto md:h-16 bg-black border-b border-b-white/40  text-white py-5 md:py-4">
         <div className="flex flex-wrap justify-around items-center md:gap-2 md:px-2 md:justify-between max-w-7xl mx-auto">
           <div onClick={handlenavbar} className="md:hidden lg:hidden">
-            {!IsOpen && ( <Menu size={18} className="hover:text-gray-300"  />)}
+            {!IsOpen && <Menu size={18} className="hover:text-gray-300" />}
           </div>
           <div>
             <h1 className="text-md md:text-xl font-bold">EZ SHOP</h1>
@@ -51,19 +56,18 @@ function Header() {
 
                 {dropdown && (
                   <ul className="absolute top-full left-0 mt-1 bg-white text-black rounded-md shadow-lg w-48 z-50">
-                    <li onClick={()=> setDropdown(false)} className="w-full text-left px-4 py-2 hover:bg-black hover:text-white duration-200 rounded-t-md">
-                      <Link to="/menscollection">Mens Collection</Link>
-                    </li>
-                    <li onClick={()=> setDropdown(false)} className="w-full text-left px-4 py-2 hover:bg-black hover:text-white duration-200">
-                      <Link to="/womencollection">Women Collection</Link>
-                    </li>
-                    <li onClick={()=> setDropdown(false)} className="w-full text-left px-4 py-2 hover:bg-black hover:text-white duration-200 rounded-b-md">
-                      <Link to="/kidcollection">Kids Collection</Link>
-                    </li>
+                    {categories.map((item,index) => (
+                      <li
+                        key={index}
+                        onClick={() => setDropdown(false)}
+                        className="w-full text-left px-4 py-2 hover:bg-black hover:text-white duration-200 rounded-t-md"
+                      >
+                        <Link onClick={()=>getbycategory(item.slug)} to={`/category/${item.slug}`}>{item.name}</Link>
+                      </li>
+                    ))}
                   </ul>
                 )}
               </li>
-
               <li className="duration-300 hover:bg-white px-2 hover:text-black hover:rounded-md">
                 <Link to="/contactus">Contact Us</Link>
               </li>
@@ -92,10 +96,16 @@ function Header() {
             <X size={28} />
           </button>
           <ul className="flex flex-col items-center gap-2 font-semibold text-md pt-16">
-            <li onClick={()=>setIsOpen(false)} className="duration-300 hover:bg-white w-full text-center hover:text-black py-2">
+            <li
+              onClick={() => setIsOpen(false)}
+              className="duration-300 hover:bg-white w-full text-center hover:text-black py-2"
+            >
               <Link to="/">Home</Link>
             </li>
-            <li onClick={()=>setIsOpen(false)}  className="duration-300 hover:bg-white w-full text-center hover:text-black py-2">
+            <li
+              onClick={() => setIsOpen(false)}
+              className="duration-300 hover:bg-white w-full text-center hover:text-black py-2"
+            >
               <Link to="/about">About</Link>
             </li>
             <li ref={dropdownRef} className="w-full relative">
@@ -107,19 +117,31 @@ function Header() {
               </button>
               {dropdown && (
                 <ul className="bg-white text-black w-full flex flex-col items-center shadow-md">
-                  <li onClick={()=>setIsOpen(false)}  className="hover:bg-black/50 hover:text-white w-full py-2 text-center duration-200">
+                  <li
+                    onClick={() => setIsOpen(false)}
+                    className="hover:bg-black/50 hover:text-white w-full py-2 text-center duration-200"
+                  >
                     <Link to="/menscollection">Mens Collection</Link>
                   </li>
-                  <li onClick={()=>setIsOpen(false)}  className="hover:bg-black/50 hover:text-white w-full py-2 text-center duration-200">
+                  <li
+                    onClick={() => setIsOpen(false)}
+                    className="hover:bg-black/50 hover:text-white w-full py-2 text-center duration-200"
+                  >
                     <Link to="/womencollection">Women Collection</Link>
                   </li>
-                  <li onClick={()=>setIsOpen(false)}  className="hover:bg-black/50 hover:text-white w-full py-2 text-center duration-200">
+                  <li
+                    onClick={() => setIsOpen(false)}
+                    className="hover:bg-black/50 hover:text-white w-full py-2 text-center duration-200"
+                  >
                     <Link to="/kidcollection">Kids Collection</Link>
                   </li>
                 </ul>
               )}
             </li>
-            <li onClick={()=>setIsOpen(false)}  className="duration-300 hover:bg-white w-full text-center hover:text-black py-2">
+            <li
+              onClick={() => setIsOpen(false)}
+              className="duration-300 hover:bg-white w-full text-center hover:text-black py-2"
+            >
               <Link to="/contactus">Contact Us</Link>
             </li>
           </ul>

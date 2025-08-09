@@ -1,119 +1,40 @@
-// import { useShop } from "../context/ShopContext";
-// import { Navigation } from "swiper/modules";
-
-// import { Swiper, SwiperSlide } from "swiper/react";
-
-// import "swiper/css";
-// import "swiper/css/navigation";
-// function Herosection() {
-//   const { product } = useShop();
-//   return (
-//     <div className="w-full max-h-[500px] flex justify-center items-center">
-//       <Swiper
-//         modules={[Navigation]}
-//         spaceBetween={50}
-//         slidesPerView={1}
-//         navigation
-//         onSwiper={(swiper) => console.log(swiper)}
-//         onSlideChange={() => console.log("slide change")}
-//       >
-//         {product.map((items, index) => {
-//           return (
-//             <SwiperSlide key={index}>
-//               <div className="max-w-7xl mx-auto py-20 grid grid-cols-2 grid-rows-1 gap-50 justify-center items-center">
-//                 <div className="px-10">
-//                  <h1>{items.title}</h1>
-//                  <p>{items.description}</p>
-//                 </div>
-//                 <div>
-//                     <img className="w-120 h-100" src={items.images[0]} alt="" />
-//                 </div>
-//               </div>
-//             </SwiperSlide>
-//           );
-//         })}
-//       </Swiper>
-//     </div>
-//   );
-// }
-
-// export default Herosection;
-
-import { useShop } from "../context/ShopContext";
-import { Navigation } from "swiper/modules";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-
-import "swiper/css";
-import "swiper/css/navigation";
-
+import heroproduct from "../assets/heroproduct.png";
 function Herosection() {
-  const { product } = useShop();
-  
   return (
-    <div className="w-full h-[500px] relative bg-">
-      <Swiper
-        modules={[Navigation]}
-        spaceBetween={0}
-        slidesPerView={1}
-        navigation={{
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        }}
-        className="h-full"
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
-      >
-        {product.map((items, index) => {
-          return (
-            <SwiperSlide key={index}>
-              <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 h-full items-center">
-                  {/* Text Content */}
-                  <div className="text-center lg:text-left space-y-4 lg:space-y-6 px-4 lg:px-0">
-                    <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 leading-tight">
-                      {items.title}
-                    </h1>
-                    <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-lg lg:max-w-none mx-auto lg:mx-0">
-                      {items.description}
-                    </p>
-                    <div className="pt-4">
-                      <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg transition-colors duration-200">
-                        Shop Now
-                      </button>
-                    </div>
-                  </div>
-                  
-                  {/* Image */}
-                  <div className="flex justify-center lg:justify-end">
-                    <div className="w-full max-w-md lg:max-w-lg xl:max-w-xl">
-                      <img 
-                        className="w-full h-64 sm:h-72 lg:h-80 xl:h-96 object-cover rounded-lg shadow-lg" 
-                        src={items.images[0]} 
-                        alt={items.title}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
-          );
-        })}
-        
-        {/* Custom Navigation Buttons */}
-        <div className="swiper-button-prev after:content-[''] bg-white hover:bg-gray-100 w-10 h-10 sm:w-12 sm:h-12 rounded-full shadow-lg border border-gray-200 flex items-center justify-center transition-all duration-200">
-          <svg className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
+    <section className="w-full min-h-screen bg-black text-white py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-8 lg:gap-12 min-h-[80vh]">
+        <div className="flex flex-col items-center lg:items-start space-y-6 sm:space-y-8 text-center lg:text-left max-w-xl">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-tight tracking-tight">
+            Limited Time{" "}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-400">
+              Offer
+            </span>
+          </h1>
+          <p className="text-lg sm:text-xl text-gray-300 max-w-lg leading-relaxed">
+            Grab the best deals on our premium collection. Don't miss out — shop
+            now and elevate your style.
+          </p>
+          <button className="group px-8 py-4 bg-white text-black rounded-2xl font-bold text-lg hover:bg-gray-100 hover:scale-105 transition-all duration-300 transform">
+            <span className="flex items-center gap-2">
+              Shop Now
+              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </span>
+          </button>
         </div>
-        
-        <div className="swiper-button-next after:content-[''] bg-white hover:bg-gray-100 w-10 h-10 sm:w-12 sm:h-12 rounded-full shadow-lg border border-gray-200 flex items-center justify-center transition-all duration-200">
-          <svg className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
+        <div className="flex justify-center lg:justify-end">
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-3xl blur-3xl group-hover:blur-2xl transition-all duration-500"></div>
+            <img
+              className="relative w-full h-auto max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl object-contain drop-shadow-[0_20px_60px_rgba(255,255,255,0.3)] group-hover:drop-shadow-[0_25px_70px_rgba(255,255,255,0.4)] hover:scale-105 transition-all duration-500 rounded-2xl"
+              src={heroproduct}
+              alt="headphones"
+            />
+          </div>
         </div>
-      </Swiper>
-    </div>
+      </div>
+    </section>
   );
 }
 

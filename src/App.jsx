@@ -4,6 +4,7 @@ import { animate, motion, useMotionValue, useTransform } from "framer-motion";
 import { ShopProvider } from "./context/ShopContext";
 import Header from "./components/Header";
 import Home from "./pages/Home";
+import ProductByCategory from "./pages/ProductByCategory";
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
             <Header />
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/category/:categoryName" element={<ProductByCategory />} />
             </Routes>
           </motion.div>
         )}
