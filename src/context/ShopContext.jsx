@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useReducer, useState } from "react";
+import CartReducer from "../context/CartReducer"
 
 export const ShopContext = createContext()
 
@@ -7,7 +8,10 @@ export const useShop = () => ( useContext(ShopContext) )
 export const ShopProvider = ({children})=>{
     const [allproducts,setAllProducts] =useState([])
     const [product,setProduct] = useState([])
+    const [singleproduct,setSingleProduct] = useState({})
     const [categories,setCategories] = useState([])
+    const [cart,dispatch] = useReducer(CartReducer,[])
+    
     const products = async()=>{
         try {
             const url = 'https://dummyjson.com/products'
@@ -51,12 +55,26 @@ export const ShopProvider = ({children})=>{
             console.log("ErroOccured",error);
         }
     }
+
+    const getsingleproduct = async(id)=>{
+        try {
+            const url = `https://dummyjson.com/products/${id}`
+            let res = await fetch(url)
+            res = await res.json()
+            if(res){
+                setSingleProduct(res)
+            }
+        } catch (error) {
+            console.log("Error Ocuured",w);
+            
+        }
+    }
     useEffect(()=>{
         products()
         category()
     },[])
     return(
-        <ShopContext.Provider value={{allproducts,product,categories,getbycategory}} >
+        <ShopContext.Provider value={{allproducts,product,singleproduct,categories,cart,dispatch,getbycategory,getsingleproduct}} >
             {children}
         </ShopContext.Provider>
     )  

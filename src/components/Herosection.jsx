@@ -1,7 +1,7 @@
 import heroproduct from "../assets/heroproduct.png";
 function Herosection() {
   return (
-    <section className="w-full min-h-screen bg-black text-white py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
+    <section className="w-full min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-8 lg:gap-12 min-h-[80vh]">
         <div className="flex flex-col items-center lg:items-start space-y-6 sm:space-y-8 text-center lg:text-left max-w-xl">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-tight tracking-tight">

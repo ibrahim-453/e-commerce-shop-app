@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useShop } from "../context/ShopContext";
 function Header() {
-  const { categories } = useShop();
+  const { categories,cart } = useShop();
   const {getbycategory} = useShop()
 
   const [dropdown, setDropdown] = useState(false);
@@ -29,7 +29,7 @@ function Header() {
   }, []);
   return (
     <>
-      <div className="fixed top-0 z-50 w-full h-auto md:h-16 bg-black border-b border-b-white/40  text-white py-5 md:py-4">
+      <div className="sticky top-0 z-50 w-full h-auto md:h-16 bg-slate-900  border-b border-b-white/50  text-white py-5 md:py-4">
         <div className="flex flex-wrap justify-around items-center md:gap-2 md:px-2 md:justify-between max-w-7xl mx-auto">
           <div onClick={handlenavbar} className="md:hidden lg:hidden">
             {!IsOpen && <Menu size={18} className="hover:text-gray-300" />}
@@ -60,7 +60,7 @@ function Header() {
                       <li
                         key={index}
                         onClick={() => setDropdown(false)}
-                        className="w-full text-left px-4 py-2 hover:bg-black hover:text-white duration-200 rounded-t-md"
+                        className="w-full text-left px-4 py-2 hover:bg-slate-900  hover:text-white duration-200 rounded-t-md"
                       >
                         <Link onClick={()=>getbycategory(item.slug)} to={`/category/${item.slug}`}>{item.name}</Link>
                       </li>
@@ -73,22 +73,14 @@ function Header() {
               </li>
             </ul>
           </div>
-          <div className="flex items-center bg-white/10 border border-white/20 rounded-full px-3 py-1 w-full max-w-[200px] md:max-w-[240px] duration-300 focus-within:ring-2 focus-within:ring-white">
-            <input
-              type="text"
-              placeholder="Search Products..."
-              className="bg-transparent flex-grow outline-none text-white placeholder-white/70 text-sm md:text-base"
-            />
-            <Search className="text-white size-4 md:size-5 cursor-pointer hover:scale-110 transition-transform duration-200" />
-          </div>
-
-          <div className="flex items-center">
-            <ShoppingCart className="text-white size-5 md:size-8 " />
-          </div>
+          <Link to="/shoppingcart" className="flex items-center gap-2">
+            <ShoppingCart className="text-white size-6 md:size-8 " />
+            {cart.length}
+          </Link>
         </div>
       </div>
       {IsOpen && (
-        <div className="fixed inset-0 bg-black text-white z-50 overflow-hidden md:hidden">
+        <div className="fixed inset-0  bg-slate-900  text-white z-50 overflow-hidden md:hidden">
           <button
             onClick={() => setIsOpen(false)}
             className="absolute top-4 left-4 text-white hover:text-gray-300 duration-200"
@@ -117,24 +109,17 @@ function Header() {
               </button>
               {dropdown && (
                 <ul className="bg-white text-black w-full flex flex-col items-center shadow-md">
+                  {categories.map((item,index)=>{
+                    return (
                   <li
+                    key={index}
                     onClick={() => setIsOpen(false)}
                     className="hover:bg-black/50 hover:text-white w-full py-2 text-center duration-200"
                   >
-                    <Link to="/menscollection">Mens Collection</Link>
+                    <Link  onClick={()=>getbycategory(item.slug)} to={`/category/${item.slug}`}>{item.name}</Link>
                   </li>
-                  <li
-                    onClick={() => setIsOpen(false)}
-                    className="hover:bg-black/50 hover:text-white w-full py-2 text-center duration-200"
-                  >
-                    <Link to="/womencollection">Women Collection</Link>
-                  </li>
-                  <li
-                    onClick={() => setIsOpen(false)}
-                    className="hover:bg-black/50 hover:text-white w-full py-2 text-center duration-200"
-                  >
-                    <Link to="/kidcollection">Kids Collection</Link>
-                  </li>
+                    )
+                  })}
                 </ul>
               )}
             </li>
